@@ -1,0 +1,20 @@
+{% extends "asistencia/base.html" %}
+{% block title %}Detalle{% endblock %}
+{% block content %}
+<div class="card" style="max-width:560px;margin:0 auto">
+    <h1 style="margin-top:0">{{ registro.nombres }} {{ registro.apellidos }}</h1>
+    <dl>
+        <dt>ID</dt><dd>{{ registro.id }}</dd>
+        <dt>Documento</dt><dd>{{ registro.get_tipo_documento_display }} · {{ registro.documento }}</dd>
+        <dt>WhatsApp</dt><dd>{{ registro.whatsapp }}</dd>
+        <dt>Fecha</dt><dd>{{ registro.fecha|date:"d/m/Y" }}</dd>
+        <dt>Asistió</dt>
+        <dd><span class="badge {% if registro.asistio %}si{% else %}no{% endif %}">{% if registro.asistio %}Sí{% else %}No{% endif %}</span></dd>
+    </dl>
+    <div class="actions" style="margin-top:1.25rem">
+        <a class="btn" href="{% url 'asistencia:editar' registro.id %}">Editar</a>
+        <a class="btn danger" href="{% url 'asistencia:eliminar' registro.id %}">Eliminar</a>
+        <a class="btn sec" href="{% url 'asistencia:lista' %}">Volver</a>
+    </div>
+</div>
+{% endblock %}

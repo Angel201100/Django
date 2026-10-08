@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contacto</title>
+</head>
+
+<body>
+
+<h1>Contacto</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <p>
+        <label>Nombre:</label><br>
+        <input
+            type="text"
+            name="nombre"
+            value="{{ contacto.nombre|default:'' }}"
+            required
+        >
+    </p>
+
+    <p>
+        <label>Correo:</label><br>
+        <input
+            type="email"
+            name="correo"
+            value="{{ contacto.correo|default:'' }}"
+            required
+        >
+    </p>
+
+    <p>
+        <label>Teléfono:</label><br>
+        <input
+            type="text"
+            name="telefono"
+            value="{{ contacto.telefono|default:'' }}"
+            required
+        >
+    </p>
+
+    <p>
+        <label>Mensaje:</label><br>
+        <textarea
+            name="mensaje"
+            required
+        >{{ contacto.mensaje|default:'' }}</textarea>
+    </p>
+
+    <button type="submit">
+        Guardar
+    </button>
+
+</form>

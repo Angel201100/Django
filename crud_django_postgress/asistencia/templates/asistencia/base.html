@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Registro de asistencia{% endblock %}</title>
+    <style>
+        :root { --bg:#f5f6f8; --card:#fff; --text:#1f2937; --muted:#6b7280; --line:#e5e7eb;
+                --primary:#2563eb; --danger:#dc2626; --ok:#16a34a; }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg:#111827; --card:#1f2937; --text:#f3f4f6; --muted:#9ca3af; --line:#374151; }
+        }
+        * { box-sizing: border-box; }
+        body { margin:0; font-family: system-ui, sans-serif; background:var(--bg); color:var(--text); }
+        header { background:var(--card); border-bottom:1px solid var(--line); }
+        .wrap { max-width:960px; margin:0 auto; padding:1rem; }
+        header .wrap { display:flex; justify-content:space-between; align-items:center; }
+        header a.brand { font-weight:700; color:var(--text); text-decoration:none; font-size:1.1rem; }
+        .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.25rem; }
+        a { color:var(--primary); }
+        .btn { display:inline-block; padding:.5rem .9rem; border-radius:6px; border:1px solid var(--primary);
+               background:var(--primary); color:#fff; text-decoration:none; font-size:.9rem; cursor:pointer; }
+        .btn.sec { background:transparent; color:var(--primary); }
+        .btn.danger { background:var(--danger); border-color:var(--danger); }
+        .btn.small { padding:.25rem .55rem; font-size:.8rem; }
+        table { width:100%; border-collapse:collapse; }
+        th, td { text-align:left; padding:.6rem .5rem; border-bottom:1px solid var(--line); font-size:.92rem; }
+        th { color:var(--muted); font-weight:600; font-size:.8rem; text-transform:uppercase; }
+        .table-scroll { overflow-x:auto; }
+        .badge { padding:.15rem .55rem; border-radius:999px; font-size:.78rem; font-weight:600; }
+        .badge.si { background:#dcfce7; color:#166534; }
+        .badge.no { background:#fee2e2; color:#991b1b; }
+        .msg { padding:.7rem 1rem; border-radius:6px; margin-bottom:1rem; background:#dcfce7; color:#166534; }
+        .filters { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+        input, select { padding:.5rem; border:1px solid var(--line); border-radius:6px;
+                        background:var(--bg); color:var(--text); font-size:.92rem; }
+        .field { margin-bottom:1rem; }
+        .field label { display:block; font-weight:600; margin-bottom:.3rem; }
+        .field input[type=text], .field input[type=date], .field select { width:100%; }
+        .errorlist { color:var(--danger); list-style:none; padding:0; margin:.3rem 0 0; font-size:.85rem; }
+        .muted { color:var(--muted); }
+        .actions { display:flex; gap:.4rem; align-items:center; flex-wrap:wrap; }
+        form.inline { display:inline; }
+        dl { display:grid; grid-template-columns:max-content 1fr; gap:.5rem 1.2rem; }
+        dt { font-weight:600; color:var(--muted); }
+        dd { margin:0; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrap">
+        <a class="brand" href="{% url 'asistencia:lista' %}">📋 Registro de asistencia</a>
+        <a class="btn" href="{% url 'asistencia:crear' %}">+ Nuevo registro</a>
+    </div>
+</header>
+<main class="wrap">
+    {% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle</title>
+</head>
+
+<body>
+
+<h1>Detalle del contacto</h1>
+
+<p>
+    <strong>Nombre:</strong>
+    {{ contacto.nombre }}
+</p>
+
+<p>
+    <strong>Correo:</strong>
+    {{ contacto.correo }}
+</p>
+
+<p>
+    <strong>Teléfono:</strong>
+    {{ contacto.telefono }}
+</p>
+
+<p>
+    <strong>Mensaje:</strong>
+    {{ contacto.mensaje }}
+</p>
+
+<br>
+
+<a href="/contactos/editar/{{ contacto.id }}/">
+    Editar
+</a>
+
+<br><br>
+
+<a href="/contactos/lista/">
+    Volver
+</a>
+
+</body>
+
+</html>

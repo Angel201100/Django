@@ -1,0 +1,54 @@
+{% extends "asistencia/base.html" %}
+{% block content %}
+<div class="card">
+    <h1 style="margin-top:0">Lista de asistencia</h1>
+
+    <form method="get" class="filters">
+        <input type="search" name="q" value="{{ q }}" placeholder="Buscar documento o nombre">
+        <input type="date" name="fecha" value="{{ fecha }}">
+        <select name="estado">
+            <option value="">Todos</option>
+            <option value="si" {% if estado == "si" %}selected{% endif %}>Asistieron</option>
+            <option value="no" {% if estado == "no" %}selected{% endif %}>No asistieron</option>
+        </select>
+        <button class="btn" type="submit">Filtrar</button>
+        <a class="btn sec" href="{% url 'asistencia:lista' %}">Limpiar</a>
+    </form>
+
+    <p class="muted">{{ registros|length }} registro{{ registros|length|pluralize }}</p>
+
+    <div class="table-scroll">
+    <table>
+        <thead>
+            <tr><th>Fecha</th><th>Documento</th><th>Nombre</th><th>WhatsApp</th><th>Asistió</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+        {% for r in registros %}
+            <tr>
+                <td>{{ r.fecha|date:"d/m/Y" }}</td>
+                <td>{{ r.tipo_documento }} {{ r.documento }}</td>
+                <td>{{ r.nombres }} {{ r.apellidos }}</td>
+                <td><a href="https://wa.me/{{ r.whatsapp|cut:'+' }}" target="_blank" rel="noopener">{{ r.whatsapp }}</a></td>
+                <td>
+                    <form class="inline" method="post" action="{% url 'asistencia:alternar' r.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="badge {% if r.asistio %}si{% else %}no{% endif %}"
+                                style="border:0;cursor:pointer" title="Clic para cambiar">
+                            {% if r.asistio %}Sí{% else %}No{% endif %}
+                        </button>
+                    </form>
+                </td>
+                <td class="actions">
+                    <a class="btn sec small" href="{% url 'asistencia:detalle' r.id %}">Ver</a>
+                    <a class="btn sec small" href="{% url 'asistencia:editar' r.id %}">Editar</a>
+                    <a class="btn danger small" href="{% url 'asistencia:eliminar' r.id %}">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6" class="muted">No hay registros.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

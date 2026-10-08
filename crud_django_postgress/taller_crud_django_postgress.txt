@@ -1,0 +1,12 @@
+#Taller:
+Realizar un proyecto en Django y postgress para gestionar los datos del registro de asistencia. Los datos son:
+id, 
+tipo_documento varchar,
+documento varchar,
+nombres varchar,
+apellidos varchar,
+whatsapp varchar,
+fecha date,
+asistio bool
+
+Cargar el proyecto a git.

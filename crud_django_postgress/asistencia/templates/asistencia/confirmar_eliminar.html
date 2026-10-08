@@ -1,0 +1,14 @@
+{% extends "asistencia/base.html" %}
+{% block title %}Eliminar registro{% endblock %}
+{% block content %}
+<div class="card" style="max-width:560px;margin:0 auto">
+    <h1 style="margin-top:0">¿Eliminar este registro?</h1>
+    <p>Se eliminará el registro de <strong>{{ registro.nombres }} {{ registro.apellidos }}</strong>
+       ({{ registro.documento }}) del {{ registro.fecha|date:"d/m/Y" }}. Esta acción no se puede deshacer.</p>
+    <form method="post" class="actions">
+        {% csrf_token %}
+        <button class="btn danger" type="submit">Sí, eliminar</button>
+        <a class="btn sec" href="{% url 'asistencia:lista' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

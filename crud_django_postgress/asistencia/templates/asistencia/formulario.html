@@ -1,0 +1,22 @@
+{% extends "asistencia/base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:560px;margin:0 auto">
+    <h1 style="margin-top:0">{{ titulo }}</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+        {% for field in form %}
+            <div class="field">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <div class="actions">
+            <button class="btn" type="submit">Guardar</button>
+            <a class="btn sec" href="{% url 'asistencia:lista' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contactos</title>
+</head>
+
+<body>
+
+<h1>Lista de contactos</h1>
+
+<a href="/contactos/">
+    Nuevo contacto
+</a>
+
+<hr>
+
+{% for contacto in contactos %}
+
+    <h3>{{ contacto.nombre }}</h3>
+
+    <p>{{ contacto.correo }}</p>
+
+    <p>{{ contacto.mensaje }}</p>
+
+   <a href="/contactos/detalle/{{ contacto.id }}/">
+        Ver
+    </a>
+
+    |
+
+    <a href="/contactos/editar/{{ contacto.id }}/">
+        Editar
+    </a>
+
+    |
+
+    <a href="/contactos/eliminar/{{ contacto.id }}/">
+        Eliminar
+    </a>
+ 
+    <hr>
+
+{% empty %}
+
+    <p>No hay contactos.</p>
+
+{% endfor %}
+
+</body>
+
+</html>
